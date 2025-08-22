@@ -159,6 +159,7 @@ performance at extreme values.</p>
                 <li>Robust OLS</li>
                 <li>Log OLS</li>
                 <li>WLS (Weighted Least Squares)</li>
+                <li>GR Bosting</li>
             </ul>
         </div>
     </div>
@@ -207,8 +208,8 @@ performance at extreme values.</p>
     <p>To complement statistical models, <strong>Gradient Boosting Regressor</strong> was tested for both years.</p>
     
     <ul>
-        <li><strong>2018:</strong> GB R² ≈ 0.607, lower than OLS (0.692), with slightly higher errors → data likely linear.</li>
-        <li><strong>2019:</strong> GB R² ≈ 0.579, slightly below Robust OLS (0.602) → small difference, but no gain without tuning.</li>
+        <li><strong>2018:</strong> R² ≈ 0.607, lower than OLS (0.692), with slightly higher errors → data likely linear.</li>
+        <li><strong>2019:</strong> R² ≈ 0.579, slightly below Robust OLS (0.602) → small difference, but no gain without tuning.</li>
     </ul>
     
     <p><strong>Interpretation:</strong> Classical regression models outperformed boosting in both years. 
@@ -217,8 +218,8 @@ performance at extreme values.</p>
     
     <h3>🏆 Final Selection</h3>
     <ul>
-        <li>2018 → <strong>OLS</strong> (main) + Gradient Boosting (comparison)</li>
-        <li>2019 → <strong>Robust OLS</strong> (main) + Gradient Boosting (comparison)</li>
+        <li>2018 → <strong>OLS</strong>
+        <li>2019 → <strong>Robust OLS</strong> 
     </ul>
     
     <h3>📊 Performance Table</h3>
