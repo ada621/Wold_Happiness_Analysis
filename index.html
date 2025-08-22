@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Happiness Analysis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 50px 30px;
+            border-radius: 25px;
+            margin-bottom: 40px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(15px);
+            animation: slideDown 0.8s ease-out;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .header .stats-quick {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .quick-stat {
+            text-align: center;
+        }
+
+        .quick-stat .number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+            display: block;
+        }
+
+        .quick-stat .label {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        /* Dashboard Grid */
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: #333;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Country Rankings */
+        .country-ranking {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .country-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            background: linear-gradient(90deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+            transition: all 0.3s ease;
+            animation: slideInLeft 0.6s ease-out;
+        }
+
+        .country-item:hover {
+            transform: translateX(10px);
+            background: linear-gradient(90deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.2);
+        }
+
+        .country-rank {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #667eea;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .country-flag {
+            font-size: 1.5rem;
+            min-width: 30px;
+        }
+
+        .country-info {
+            flex-grow: 1;
+        }
+
+        .country-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .country-region {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 2px;
+        }
+
+        .country-score {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        /* Progress bars for factors */
+        .factor-analysis {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .factor {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .factor-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+        }
+
+        .factor-name {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .factor-value {
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: #e0e0e0;
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 6px;
+            transition: width 1s ease-out;
+        }
+
+        /* Region cards */
+        .region-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .region-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            animation: zoomIn 0.6s ease-out;
+        }
+
+        .region-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .region-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .region-score {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .region-countries {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Full width sections */
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        /* Animations */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .header .stats-quick {
+                gap: 20px;
+            }
+            
+            .country-item {
+                padding: 12px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🌍 World Happiness Report 2024</h1>
+            <p>Dünya mutluluk verilerinin kapsamlı analizi ve görselleştirmesi</p>
+            <div class="stats-quick">
+                <div class="quick-stat">
+                    <span class="number">143</span>
+                    <span class="label">Ülke Analiz Edildi</span>
+                </div>
+                <div class="quick-stat">
+                    <span class="number">7.74</span>
+                    <span class="label">En Yüksek Skor</span>
+                </div>
+                <div class="quick-stat">
+                    <span class="number">10</span>
+                    <span class="label">Bölge</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard -->
+        <div class="dashboard">
+            <!-- Top 10 Countries -->
+            <div class="card">
+                <h2>🏆 En Mutlu 10 Ülke</h2>
+                <div class="country-ranking">
+                    <div class="country-item">
+                        <div class="country-rank">1</div>
+                        <div class="country-flag">🇫🇮</div>
+                        <div class="country-info">
+                            <div class="country-name">Finlandiya</div>
+                            <div class="country-region">Batı Avrupa</div>
+                        </div>
+                        <div class="country-score">7.741</div>
+                    </div>
+                    <div class="country-item">
+                        <div class="country-rank">2</div>
+                        <div class="country-flag">🇩🇰</div>
+                        <div class="country-info">
+                            <div class="country-name">Danimarka</div>
+                            <div class="country-region">Batı Avrupa</div>
+                        </div>
+                        <div class="country-score">7.583</div>
+                    </div>
+                    <div class="country-item">
+                        <div class="country-rank">3</div>
+                        <div class="country-flag">🇮🇸</div>
+                        <div class="country-info">
+                            <div class="country-name">İzlanda</div>
+                            <div class="country-region">Batı Avrupa</div>
+                        </div>
+                        <div class="country-score">7.525</div>
+                    </div>
+                    <div class="country-item">
+                        <div class="country-rank">4</div>
+                        <div class="country-flag">🇨🇭</div>
+                        <div class="country-info">
+                            <div class="country-name">İsviçre</div>
+                            <div class="country-region">Batı Avrupa</div>
+                        </div>
+                        <div class="country-score">7.512</div>
+                    </div>
+                    <div class="country-item">
+                        <div class="country-rank">5</div>
+                        <div class="country-flag">🇳🇱</div>
+                        <div class="country-info">
+                            <div class="country-name">Hollanda</div>
+                            <div class="country-region">Batı Avrupa</div>
+                        </div>
+                        <div class="country-score">7.449</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Happiness Factors -->
+            <div class="card">
+                <h2>📊 Mutluluk Faktörleri (Finlandiya)</h2>
+                <div class="factor-analysis">
+                    <div class="factor">
+                        <div class="factor-header">
+                            <span class="factor-name">💰 GDP per Capita</span>
+                            <span class="factor-value">1.446</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 72%;"></div>
+                        </div>
+                    </div>
+                    <div class="factor">
+                        <div class="factor-header">
+                            <span class="factor-name">🤝 Sosyal Destek</span>
+                            <span class="factor-value">1.106</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 55%;"></div>
+                        </div>
+                    </div>
+                    <div class="factor">
+                        <div class="factor-header">
+                            <span class="factor-name">🏥 Sağlıklı Yaşam</span>
+                            <span class="factor-value">0.741</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 37%;"></div>
+                        </div>
+                    </div>
+                    <div class="factor">
+                        <div class="factor-header">
+                            <span class="factor-name">🗽 Özgürlük</span>
+                            <span class="factor-value">0.691</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 35%;"></div>
+                        </div>
+                    </div>
+                    <div class="factor">
+                        <div class="factor-header">
+                            <span class="factor-name">💝 Cömertlik</span>
+                            <span class="factor-value">0.124</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 6%;"></div>
+                        </div>
+                    </div>
+                    <div class="factor">
+                        <div class="factor-header">
+                            <span class="factor-name">⚖️ Güven</span>
+                            <span class="factor-value">0.481</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 24%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Regional Analysis -->
+            <div class="card full-width">
+                <h2>🌍 Bölgesel Mutluluk Analizi</h2>
+                <div class="region-grid">
+                    <div class="region-card">
+                        <div class="region-name">Batı Avrupa</div>
+                        <div class="region-score">7.2</div>
+                        <div class="region-countries">21 ülke</div>
+                    </div>
+                    <div class="region-card">
+                        <div class="region-name">Kuzey Amerika</div>
+                        <div class="region-score">7.1</div>
+                        <div class="region-countries">2 ülke</div>
+                    </div>
+                    <div class="region-card">
+                        <div class="region-name">Avustralya</div>
+                        <div class="region-score">7.1</div>
+                        <div class="region-countries">2 ülke</div>
+                    </div>
+                    <div class="region-card">
+                        <div class="region-name">Orta & Doğu Avrupa</div>
+                        <div class="region-score">6.3</div>
+                        <div class="region-countries">17 ülke</div>
+                    </div>
+                    <div class="region-card">
+                        <div class="region-name">Latin Amerika</div>
+                        <div class="region-score">6.1</div>
+                        <div class="region-countries">20 ülke</div>
+                    </div>
+                    <div class="region-card">
+                        <div class="region-name">Doğu Asya</div>
+                        <div class="region-score">5.6</div>
+                        <div class="region-countries">6 ülke</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Turkey Analysis -->
+            <div class="card">
+                <h2>🇹🇷 Türkiye Analizi</h2>
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="font-size: 3rem; color: #667eea; font-weight: bold;">5.373</div>
+                    <div style="color: #666; font-size: 1.1rem;">Mutluluk Skoru</div>
+                    <div style="color: #666; margin-top: 5px;">📍 Orta Doğu ve Kuzey Afrika bölgesinde</div>
+                </div>
+                <div class="factor-analysis">
+                    <div class="factor">
+                        <div class="factor-header">
+                            <span class="factor-name">💰 GDP</span>
+                            <span class="factor-value">1.183</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 59%;"></div>
+                        </div>
+                    </div>
+                    <div class="factor">
+                        <div class="factor-header">
+                            <span class="factor-name">🤝 Sosyal Destek</span>
+                            <span class="factor-value">0.875</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 44%;"></div>
+                        </div>
+                    </div>
+                    <div class="factor">
+                        <div class="factor-header">
+                            <span class="factor-name">🏥 Sağlık</span>
+                            <span class="factor-value">0.593</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 30%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
