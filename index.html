@@ -188,3 +188,45 @@ performance at extreme values.</p>
         ‼️💡 More details: <a href="https://github.com/ada621/World_Happiness_Analysis/tree/main" target="_blank" style="color: #667eea; text-decoration: none;">Project Repository</a>
     </p>
 </section>
+<section>
+    <h2>⚖️ Model Selection & Machine Learning Comparison</h2>
+    
+    <p><strong>2018:</strong> OLS model was selected because no heteroskedasticity was detected 
+    and the model fit the data well. It provided strong interpretability and simplicity.</p>
+    
+    <p><strong>2019:</strong> Significant heteroskedasticity was present. After evaluating OLS, Robust OLS, WLS, and Log OLS:
+        <ul>
+            <li>Robust OLS reduced but did not eliminate heteroskedasticity; still less sensitive to outliers than OLS.</li>
+            <li>WLS achieved very high R² but was likely overfitted due to outlier influence.</li>
+            <li>Log OLS had low AIC/BIC but made interpretation more complex.</li>
+        </ul>
+        Based on this, <strong>Robust OLS</strong> was chosen for 2019.
+    </p>
+    
+    <h3>📈 Additional ML Model Evaluation</h3>
+    <p>To complement statistical models, <strong>Gradient Boosting Regressor</strong> was tested for both years.</p>
+    
+    <ul>
+        <li><strong>2018:</strong> GB R² ≈ 0.607, lower than OLS (0.692), with slightly higher errors → data likely linear.</li>
+        <li><strong>2019:</strong> GB R² ≈ 0.579, slightly below Robust OLS (0.602) → small difference, but no gain without tuning.</li>
+    </ul>
+    
+    <p><strong>Interpretation:</strong> Classical regression models outperformed boosting in both years. 
+    ML models still served as robustness checks and confirmed the dominance of linear relationships 
+    in the World Happiness data.</p>
+    
+    <h3>🏆 Final Selection</h3>
+    <ul>
+        <li>2018 → <strong>OLS</strong> (main) + Gradient Boosting (comparison)</li>
+        <li>2019 → <strong>Robust OLS</strong> (main) + Gradient Boosting (comparison)</li>
+    </ul>
+    
+    <h3>📊 Performance Table</h3>
+    <img src="model_comparison_table.png" alt="Model Comparison Table">
+    
+    <h3>📊 Visual Comparisons</h3>
+    <p>You can view the model R², error metrics, and residual distributions in the following charts:</p>
+    <img src="bar_chart.png" alt="R2 Comparison">
+    <img src="residual.png" alt="Residual Boxplot">
+    <img src="predicted_vs_actual.png" alt="Predicted vs Actual">
+</section>
