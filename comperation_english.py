@@ -21,60 +21,40 @@ In the happiness_graph.py file, I created a analysis graphs for both years.All g
 
 -------------------MODEL SELECTİON------------------------------
 
-For the 2018 dataset I applied OLS model because there was no evidence of heteroskedasticity and the model was fit my data well.
-Also I preferred OLS due to its interpretability and simplicity.
-But in 2019 dataset exhibited significant heteroskedasticity. For this reason I evaluated OLS,Robust OLS,WLS and Log OLS models in
-in a separate file to find the best fit.
-
-The Robust OLS adapted the heteroskedasticity but didn't eliminate it.As a result the model's predictive performance may still
-be affected.Because of outliers remain harmful but Robust OLS reduce their influence.It can't be fully ignore them.
-Prediction ranges may still be misleading especially when generalizing results.
-
-On the other side WLS gave the highest R-squared(0.99)and lowest AIC(53.16) and BIC(74.51) values.>>> It can cause of overfitting
-possibly triggered by outliers.
-
-Log OLS have a lowest AIC and BIC values and ıt means it achieved the best balance between model complexity and fit.
-
-
-For the 2018 dataset, I applied the OLS model because there was no evidence of heteroskedasticity and the model fit my data well. I also preferred OLS
-due to its interpretability and simplicity.
-However, the 2019 dataset exhibited significant heteroskedasticity. For this reason, I evaluated OLS, Robust OLS, WLS, and Log OLS models in a separate file 
+For the 2018 dataset, I applied the OLS model because there was no evidence of heteroskedasticity and the model fit my data well. I also preferred OLS due 
+to its interpretability and simplicity.
+However, the 2019 dataset exhibited significant heteroskedasticity. For this reason, I evaluated OLS, Robust OLS, WLS, and Log OLS models in a separate file
 to find the best fit.
-- The Robust OLS adapted to heteroskedasticity but did not eliminate it. As a result, the model's predictive performance may still be affected, because 
-outliers remain harmful even though Robust OLS reduces their influence. It cannot fully ignore them, and prediction ranges may still be misleading,
+- Robust OLS adapted to heteroskedasticity but did not fully eliminate it. As a result, the model's predictive performance may still be affected, because 
+outliers remain harmful even though Robust OLS reduces their influence. It cannot completely ignore them, and prediction ranges may still be misleading,
 especially when generalizing results.
-- On the other side, WLS gave the highest R-squared (0.99) and lowest AIC (53.16) and BIC (74.51) values, which may be a sign of overfitting, possibly
-triggered by outliers.
-- Log OLS had the lowest AIC and BIC values among the tested models, meaning it achieved the best balance between model complexity and fit. However,
-interpretation becomes more difficult due to the log transformation.
-After this comparison, I also evaluated the confidence intervals for a more detailed assessment. Based on this evaluation, I decided to choose the 
-Robust OLS model for my 2019 dataset because OLS is not compatible with heteroskedasticity and WLS is sensitive to outliers (and I have outliers in some
-variables). I did not select the Log OLS model because it could make interpretation more difficult. With Robust OLS, my model is compatible with
-heteroskedasticity and also reduces the influence of outliers.
+- WLS gave the highest R-squared (0.99) and lowest AIC (53.16) and BIC (74.51) values, but this may indicate overfitting, possibly triggered by outliers.
+- Log OLS had the lowest AIC and BIC values among the tested models, meaning it achieved the best balance between model complexity and fit.
+However, interpretation becomes more difficult due to the log transformation.
+After this comparison, I also evaluated the confidence intervals for a more detailed assessment. Based on this evaluation, I decided to choose the Robust OLS
+model for my 2019 dataset because OLS is not compatible with heteroskedasticity and WLS is sensitive to outliers (and I have outliers in some variables).
+I did not select the Log OLS model because it could make interpretation more difficult. With Robust OLS, my model is compatible with heteroskedasticity and 
+also reduces the influence of outliers.
 
 Additional Machine Learning Model Evaluation
-To complement the classical statistical approach, I also tested Gradient Boosting Regressor as a machine learning model for both years. This allowed me to 
-compare a flexible, non-linear, scale-invariant method with my chosen statistical models.
+To complement the classical statistical approach, I also tested a Gradient Boosting Regressor for both years. This non-linear, ensemble-based method is 
+scale-invariant and can capture complex feature interactions without requiring the strict assumptions of linear regression.
 - 2018 Results:
-- Gradient Boosting achieved R² ≈ 0.607, which was lower than OLS/Robust OLS/WLS (≈ 0.692).
-- MAE and RMSE values were slightly higher than the classical models, suggesting that in 2018 the relationships in the data were predominantly linear, which 
-favoured the regression-based approaches.
+Gradient Boosting achieved R² ≈ 0.607, which was lower than the linear models (≈ 0.692). MAE and RMSE were slightly higher as well. This suggests that for 
+2018, the relationship between predictors and the happiness score was largely linear, favouring regression-based approaches.
 - 2019 Results:
-- Gradient Boosting achieved R² ≈ 0.579, again slightly below Robust OLS (≈ 0.602).
-- While the performance gap was small, Gradient Boosting did not surpass the classical models without parameter tuning, indicating that its advantage in 
-capturing complex patterns was not fully utilised with default settings.
+Gradient Boosting achieved R² ≈ 0.579, slightly below Robust OLS (≈ 0.602), with similar error metrics. The small performance gap indicates that, without 
+extensive hyperparameter tuning, boosting did not exploit any potential non-linear structure in the 2019 dataset.
 - Interpretation:
-In both years, the linear regression family outperformed Gradient Boosting in raw predictive accuracy. This suggests that the World Happiness datasets for 
-2018 and 2019 have a largely linear relationship between predictors and the target variable.
-However, incorporating Gradient Boosting provided an important robustness check: if non-linear effects or interaction patterns had been dominant, the
-boosting method would have likely outperformed the linear models.
+In both years, classical regression models outperformed Gradient Boosting in predictive accuracy. This implies that the datasets' predictor–outcome 
+relationships were predominantly linear. However, including Gradient Boosting served as a robustness check — had there been strong non-linear patterns, 
+the boosting model would likely have outperformed the linear models.
 
 Final Decision:
-- 2018: OLS remains the preferred model due to better performance and interpretability.
-- 2019: Robust OLS remains the preferred model due to heteroskedasticity handling and resistance to outlier influence.
-- Gradient Boosting is retained as a supplementary model for comparison and robustness analysis, even if not selected as the primary model, as it adds
-methodological diversity and helps validate that linear models are not missing substantial non-linear structure in the data.
-
+- 2018: OLS is retained as the primary model, due to its superior fit, interpretability, and consistency with the data’s assumptions.
+- 2019: Robust OLS is retained as the primary model, due to its handling of heteroskedasticity and reduced sensitivity to outliers.
+- Gradient Boosting is included as a supplementary model for validation and methodological diversity. Its results support the conclusion that linear models
+are sufficient for the available data, while also providing an additional comparison point for model performance.
 
 
 
@@ -351,3 +331,4 @@ scope of support and impact on individuals can differ significantly.
 
 
 '''
+
