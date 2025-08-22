@@ -35,6 +35,7 @@
 - Robust OLS
 - Log OLS
 - Weighted Least Squares (**WLS**)
+- Gradient Boosting
 
 **Evaluation criteria:**
 - 📐 Akaike Information Criterion (**AIC**)  
