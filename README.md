@@ -1,7 +1,11 @@
 # 🌍 World Happiness Analysis
 
 ## 📌 Project Overview
-This project analyzes the **2018** and **2019** World Happiness datasets to explore the factors influencing happiness scores across countries and to identify differences between the two years.
+   In this project, I worked with the <strong>2018</strong> and <strong>2019</strong> World Happiness datasets. 
+   My aim was to analyze the internal structure of each year’s data and explore the differences and changes between them over time.
+  ➕In addition to obtaining prediction results, I sought to perform a comprehensive statistical analysis that included evaluating
+  the model, testing regression assumptions, and comparing coefficients to gain deeper insights into the data.
+
 
 **Dependent variable:**
 - Happiness Score
@@ -12,7 +16,7 @@ This project analyzes the **2018** and **2019** World Happiness datasets to expl
 - 🏥 Healthy life expectancy  
 - 🗽 Freedom to make life choices  
 - 💝 Generosity  
-- ⚖️ Perceptions of corruption  
+- ⚖️ Perceptions of corruption
 
 ---
 
@@ -36,7 +40,11 @@ This project analyzes the **2018** and **2019** World Happiness datasets to expl
 - 📐 Akaike Information Criterion (**AIC**)  
 - 📏 Bayesian Information Criterion (**BIC**)  
 - 📊 R-squared (**R²**)  
-- 🔗 Correlation with the dependent variable  
+- 🔗 Correlation with the dependent variable
+- 🔍Regression Assumptions
+- 📈Confidence Intervals
+- 💡Model Comparison
+
 
 **Outcome:**
 - **2018:** OLS model performed best overall.  
