@@ -165,7 +165,7 @@ model19 = sm.OLS(y19, X19).fit()
 coefs18 = model18.params.drop("const")
 coefs19 = model19.params.drop("const")
 
-# Görselleştir
+
 df_plot = pd.DataFrame({
     "2018": coefs18,
     "2019": coefs19
@@ -180,6 +180,7 @@ plt.xticks(rotation=0)
 plt.tight_layout()
 plt.savefig("degisken_etkileri_yillar.png", dpi=300)
 plt.close()
+
 
 
 
