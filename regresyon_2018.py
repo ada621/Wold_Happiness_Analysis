@@ -94,7 +94,7 @@ plt.scatter(y_test, y_pred, alpha=0.6, label='2018 Tahminleri')
 # 45° referans çizgisi
 plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'k--', label='Doğruluk Çizgisi')
 
-# Etiketler ve başlık
+
 plt.xlabel('Gerçek Mutluluk Skoru')
 plt.ylabel('Tahmin Edilen Skor')
 plt.title('2018: Gerçek vs Tahmin Değerleri')
@@ -103,5 +103,6 @@ plt.grid(True)
 plt.tight_layout()
 
 plt.savefig("tahmin_vs_gercek_2018.png", dpi=300) 
+
 
 
