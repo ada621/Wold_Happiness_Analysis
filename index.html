@@ -170,39 +170,36 @@
         life expectancy scores increased. This could explain the difference in 2018 labels and why the 2019 label didn't change.
         Perhaps the increase in freedom to make a life choice balance out the decreases in the other variables.</p>
     </section>
-
-    <section>
-        <h2>⚖️ Model Selection & Machine Learning Comparison</h2>
-        
-        <p><strong>2018:</strong> OLS model was selected because no heteroskedasticity was detected 
-        and the model fit the data well. It provided strong interpretability and simplicity.</p>
-        
-        <p><strong>2019:</strong> Significant heteroskedasticity was present. After evaluating OLS, Robust OLS, WLS, and Log OLS:</p>
-        <ul>
-            <li>Robust OLS reduced but did not eliminate heteroskedasticity; still less sensitive to outliers than OLS.</li>
-            <li>WLS achieved very high R² but was likely overfitted due to outlier influence.</li>
-            <li>Log OLS had low AIC/BIC but made interpretation more complex.</li>
-        </ul>
-        <p>Based on this, <strong>Robust OLS</strong> was chosen for 2019.</p>
-        
-        <h3>📈 Additional ML Model Evaluation</h3>
-        <p>To complement statistical models, <strong>Gradient Boosting Regressor</strong> was tested for both years.</p>
-        
-        <ul>
-            <li><strong>2018:</strong>Gradient Boosting R² ≈ 0.607, lower than OLS (0.692), with slightly higher errors → data likely linear.</li>
-            <li><strong>2019:</strong>Gradient Boosting R² ≈ 0.579, slightly below Robust OLS (0.602) → small difference, but no gain without tuning.</li>
-        </ul>
-        
-        <p><strong>Interpretation:</strong> Classical regression models outperformed boosting in both years. 
-        ML models still served as robustness checks and confirmed the dominance of linear relationships 
-        in the World Happiness data.</p>
-        
-        <h3>🏆 Final Selection</h3>
-        <ul>
-            <li>2018 → <strong>OLS</strong></li>
-            <li>2019 → <strong>Robust OLS</strong></li>
-        </ul>
-    </section>
+<section>
+    <h2>⚖️ Model Selection & Machine Learning Comparison</h2>
+    
+    <p><strong>2018:</strong> OLS was selected because no heteroskedasticity was detected 
+    and the model fit the data well. It offered both interpretability and simplicity.</p>
+    
+    <p><strong>2019:</strong> Significant heteroskedasticity was present. After evaluating OLS, Robust OLS, WLS, and Log OLS:</p>
+    <ul>
+        <li><strong>Robust OLS:</strong> reduced heteroskedasticity and was less sensitive to outliers.</li>
+        <li><strong>WLS:</strong> achieved very high R² (~0.99) but likely overfitted due to outliers.</li>
+        <li><strong>Log OLS:</strong> had the lowest AIC/BIC but reduced interpretability.</li>
+    </ul>
+    <p>Therefore, <strong>Robust OLS</strong> was chosen for 2019.</p>
+    
+    <h3>📈 Additional ML Model Evaluation</h3>
+    <p>To complement statistical models, a <strong>Gradient Boosting Regressor</strong> was tested for both years:</p>
+    
+    <ul>
+        <li><strong>2018:</strong> R² around 0.61 (lower than OLS at ~0.69) with slightly higher errors → relationships appear mostly linear.</li>
+        <li><strong>2019:</strong> R² around 0.58 (slightly below Robust OLS at ~0.60) → minimal gains without tuning.</li>
+    </ul>
+    
+    <p><strong>Interpretation:</strong> Gradient Boosting did not outperform classical regression models in either year, 
+    suggesting that the data’s predictor–outcome relationships are predominantly linear. 
+    For this reason, boosting was not selected as a primary model but included as a robustness check.</p>
+    
+    <h3>🏆 Final Selection</h3>
+    <p><strong>2018 → OLS | 2019 → Robust OLS</strong></p>
+</section>
+   
 
     <section>
         <h2>🔍Actual Values and Regression Predicted Values 2018</h2>
