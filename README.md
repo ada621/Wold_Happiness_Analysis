@@ -1,10 +1,13 @@
 # 🌍 World Happiness Analysis
-
 ## 📌 Project Overview
-   In this project, I worked with the <strong>2018</strong> and <strong>2019</strong> World Happiness datasets. 
-   My aim was to analyze the internal structure of each year’s data and explore the differences and changes between them over time.
-  ➕In addition to obtaining prediction results, I sought to perform a comprehensive statistical analysis that included evaluating
-  the model, testing regression assumptions, and comparing coefficients to gain deeper insights into the data.
+In this project, I worked with the **2018** and **2019** World Happiness datasets. 
+My aim was to analyze the internal structure of each year’s data and explore the differences and changes between them over time.  
+
+➕ In addition to obtaining prediction results, I performed a comprehensive statistical analysis that included evaluating 
+the model, testing regression assumptions, and comparing coefficients to gain deeper insights into the data.  
+
+🎯 Beyond the technical aspect, my goal was also to strengthen my statistical analysis skills while leveraging my psychology 
+background to interpret the findings within a broader psychological and sociological context.
 
 
 **Dependent variable:**
@@ -33,7 +36,6 @@
 **Models tested:**
 - Ordinary Least Squares (**OLS**)
 - Robust OLS
-- Log OLS
 - Weighted Least Squares (**WLS**)
 - Gradient Boosting
 
@@ -45,6 +47,9 @@
 - 🔍Regression Assumptions
 - 📈Confidence Intervals
 - 💡Model Comparison
+- 🎯compares changes between the 2018 and 2019 datasets
+  and
+  interprets them in a psychological and sociological context.
 
 
 **Outcome:**
