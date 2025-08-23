@@ -96,7 +96,6 @@
                 <ul style="list-style: none; padding-left: 0; line-height: 1.8;">
                     <li>OLS (Ordinary Least Squares)</li>
                     <li>Robust OLS</li>
-                    <li>Log OLS</li>
                     <li>WLS (Weighted Least Squares)</li>
                     <li>Gradient Boosting</li>
                 </ul>
@@ -176,11 +175,11 @@
     <p><strong>2018:</strong> OLS was selected because no heteroskedasticity was detected 
     and the model fit the data well. It offered both interpretability and simplicity.</p>
     
-    <p><strong>2019:</strong> Significant heteroskedasticity was present. After evaluating OLS, Robust OLS, WLS, and Log OLS:</p>
+    <p><strong>2019:</strong> Significant heteroskedasticity was present. After evaluating OLS, Robust OLS, WLS, and Gradient Boosting:</p>
     <ul>
         <li><strong>Robust OLS:</strong> reduced heteroskedasticity and was less sensitive to outliers.</li>
         <li><strong>WLS:</strong> achieved very high R² (~0.99) but likely overfitted due to outliers.</li>
-        <li><strong>Log OLS:</strong> had the lowest AIC/BIC but reduced interpretability.</li>
+        <li><strong>GB:</strong> Its fit is weaker compared to the linear models, and it has a higher likelihood of deviating on outliers.</li>
     </ul>
     <p>Therefore, <strong>Robust OLS</strong> was chosen for 2019.</p>
     
@@ -225,10 +224,31 @@
         
         <h3>📊 Performance Table</h3>
         <img src="figures/model_comparison_table.png" alt="Model Comparison Table">
+        <p>📢This graph clearly supports the model selection rationale discussed above. In both 2018 and 2019, OLS, Robust OLS, and WLS produce identical 
+            results, while GB shows a weaker fit to the dataset.
+For the 2019 dataset, Robust OLS is the most appropriate choice because:
+- The Breusch–Pagan test confirmed the presence of heteroskedasticity.
+- Due to the presence of outliers, using GB would be risky — and its fit was clearly weaker.
+- Among the remaining models, Robust OLS performs on par without falling behind in accuracy.
+For the 2018 dataset, the Breusch–Pagan test found no heteroskedasticity. However, the Jarque–Bera normality test indicated the presence of outliers and a non‑normal distribution.
+- Given the outliers and GB’s weaker fit compared to the other models, GB was excluded.
+- Because the data is homoskedastic, Robust OLS is unnecessary.
+- OLS is the most suitable model here due to its simplicity, interpretability, and strong performance.
+In summary:
+- 2018: OLS (homoskedastic, outliers present, GB weaker)
+- 2019: Robust OLS (heteroskedastic, outliers present, GB weaker)
+</p>
         
         <h3>📊 Visual Comparisons</h3>
         <p>You can view the model predicted happiness scores with actual scores distribution in the following chart:</p>
         <img src="figures/predicted_vs_actual.png" alt="Predicted vs Actual">
+        <p>-📢OLS, Robust OLS, WLS: Show similar predictive performance.
+- However, since heteroskedasticity was detected in the 2019 dataset, Robust OLS is preferred for more reliable confidence intervals and p‑values.
+- In the 2018 dataset, no heteroskedasticity was observed, so OLS was sufficient.
+- GB (Gradient Boosting) performed well overall, but exhibited more noticeable deviations for certain outliers.
+In summary, while predictive accuracy was similar, the choice of model varied depending on the dataset’s characteristics, with statistical reliability being
+the key deciding factor.
+</p>
     </section>
 </main>
 
