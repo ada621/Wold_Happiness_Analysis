@@ -30,33 +30,24 @@ bulunmakta.
 -------------------------------------------------------------------------------------------------------------------------------------
 2018 modelinde OLS modeli uyguladım çünkü heteroskedasticity yoktu ve OLS modeli benim verim için uygundu. basit ve anlaşılır model
 olduğu için tercih ettim.
-Ancak 2019 verisinde heteroskedasticity değerim oldukça yüksek çıktı..Bu sebeple OLS,Robust OLS,WLS ve Log OLS modellerini ayrı bir
-file da 2019 verisinin analizi için kıyasladım.
+Ancak 2019 verisinde heteroskedasticity değerim oldukça yüksek çıktı..Bu sebeple OLS,Robust OLS,WLS ve Log OLS ve Gradient Boosting (GB) modellerini
+ayrı bir file da 2019 verisinin analizi için kıyasladım.
 
-Log OLS,Robust OLS ve OLS modellerinin squared değerleri neredeyse aynı. AIC ve BIC değerleri farklılık gösteriyor.Onda da Robust OLS
-ve OLS nin AIC ve BIC değerleri aynı.>>>çünkü Robust OLS bir değişiklik yaratmıyor yalnızca heteroskedasticity e karşı daha güvenli 
-hale getiriyor modeli..
-
-
- 
-Robust OLS ile modelim heteroskedastisiteye uyum sağlıyor ancak heteroskedastisiteyi yok etmiyor.bu yüzden modelin tahmin yeteneği
-zarar görebilir..Çünkü uç değerler modele hala zarar verebilir ve robust OLS bu uç değerleri görmzden gelmez.Ancak onların etkisini 
-daha az belirleyici hale getirir. Tahmin ararlıkları hala yanıltıcı olabilir.Özellikle genelleme yapılmak istenirse bu önemli bir
-problem olabilir.
-
-
-WLS ise en yüksek squared değerini veriyor(0.99) ve AIC(53.16) ile BIC(74.51) değerleri en düşük
-olan bu.>>>ki bu aşırı uyum(overfitting) problemi yaratabilir>>uç değerler de var ve bu overfittingi tetikleyebilir.
-
-Log OLS ise en düşük AIC ve BIC değerini veriyor bu da model karmaşıklığa karşı en iyi dengiyi kuruyor anlamına gelir>>>
+Log OLS,Robust OLS ve OLS modellerinin squared, AIC ve BIC değerleri aynı.
 
 daha sonra daha detaylı bir kıyas için güven aralıklarını kıyasladım.
 yaptığım kıyas sonucunda -Robust OLS- modelini tercih etmeye karar verdim çünkü:,
 çünkü OLS heteroskedastisiteye uyumlu değil,
-WLS modeli uç değerlere hassas ve benim uç değerlerim bazı değişkenlerde görülüyor..
+WLS modeli uç değerlere hassas ve benim uç değerlerim bazı değişkenlerde görülüyor.
+GB ise her iki yılda da R-squared değerinde geride kalıyor ve daha yüksek hata oranına sahip.
 Log OLS ise yorumlamamı zorlaştıracağı için (çünkü benim çalışmam tahmin içeriyor ama aynı zamanda yorumlamaya dayalı) tercih etmedim.
 Robust OLS ile hem heteroskedastisiteye modelim uyum sağlıyor hem de uç değerlerimin etkisini azaltıyor.
 
+
+Robust OLS ile modelim heteroskedastisiteye uyum sağlıyor ancak heteroskedastisiteyi yok etmiyor.bu yüzden modelin tahmin yeteneği
+zarar görebilir çünkü uç değerler modele hala zarar verebilir ve robust OLS bu uç değerleri görmezden gelmez.Ancak onların etkisini 
+daha az belirleyici hale getirir. Tahmin ararlıkları hala yanıltıcı olabilir.Özellikle genelleme yapılmak istenirse bu önemli bir
+problem olabilir.
 
 
 
@@ -326,3 +317,4 @@ desteğin boyutu ve kişilerde yarattığı etkide farklılıklar görülebilir.
 
 
 '''
+
