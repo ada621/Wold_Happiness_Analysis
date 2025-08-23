@@ -324,4 +324,5 @@ desteğin boyutu ve kişilerde yarattığı etkide farklılıklar görülebilir.
 
 
 
+
 '''
